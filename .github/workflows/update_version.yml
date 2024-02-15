@@ -1,0 +1,41 @@
+name: Update EMBA version details
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # do it every day
+
+jobs:
+  update_version:
+    if: github.repository_owner == 'e-m-b-a'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Branch
+      uses: actions/checkout@v3
+    - name: Install requirements
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install curl -y
+    - name: update EMBA version details
+      run: |
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba/blob/master/config/VERSION.txt | grep -w "rawLines" | sed -E 's/.*"rawLines":\[\"([0-9]\.[0-9]\.[0-9])(.*)\"\]\,.*/\1\2/' > EMBA_VERSION.txt
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: Update EMBA version details
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        signoff: false
+        branch: update_emba_version_details
+        delete-branch: true
+        title: 'Update EMBA version details'
+        body: |
+          Update report
+          - Nightly update of EMBA version details
+        labels: |
+          db_update
+          automated pr
+        milestone: 0
+        draft: false
