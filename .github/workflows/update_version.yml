@@ -38,7 +38,7 @@ jobs:
           Update report
           - Nightly update of EMBA version details
         labels: |
-          db_update
+          automerge
           automated pr
         milestone: 0
         draft: false
