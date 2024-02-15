@@ -25,3 +25,4 @@ jobs:
           contents: write
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          UPDATE_LABEL: ""
