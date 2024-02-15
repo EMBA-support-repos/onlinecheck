@@ -25,4 +25,5 @@ jobs:
           contents: write
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: "automerge"
           UPDATE_LABEL: ""
