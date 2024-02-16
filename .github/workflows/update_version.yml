@@ -23,7 +23,10 @@ jobs:
     - name: update EMBA version details
       run: |
         curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba/blob/master/config/VERSION.txt | grep -w "rawLines" | sed -E 's/.*"rawLines":\[\"([0-9]\.[0-9]\.[0-9])(.*)\"\]\,.*/\1\2/' > EMBA_VERSION.txt
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EMBA_GITHUB_HASH.txt
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/embark | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EMBArk_GITHUB_HASH.txt
         sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq . | grep "digest" | head -n1 | awk '{print $2}' | sed -E 's/"sha256:(.+)",/\1/' > EMBA_CONTAINER_HASH.txt
+        curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > NVD_HASH.txt
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v4
