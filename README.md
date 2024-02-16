@@ -2,8 +2,6 @@
 
 This repo is used used for onlinechecks and version checks for [*EMBA*](https://github.com/e-m-b-a).
 
-If we missed something please [contact us](https://github.com/e-m-b-a/emba/issues).
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/e-m-b-a/emba/master/helpers/emba.svg" width="200"/>
 </p>
