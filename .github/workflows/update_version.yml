@@ -29,6 +29,6 @@ jobs:
         curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > NVD_HASH.txt
     - name: sync it
       run: gh repo sync $REPOSITORY
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPOSITORY: ${{ github.repository }}
