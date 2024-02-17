@@ -27,23 +27,8 @@ jobs:
         curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/embark | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EMBArk_GITHUB_HASH.txt
         sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq . | grep "digest" | head -n1 | awk '{print $2}' | sed -E 's/"sha256:(.+)",/\1/' > EMBA_CONTAINER_HASH.txt
         curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > NVD_HASH.txt
-    - name: Create Pull Request
-      id: cpr
-      uses: peter-evans/create-pull-request@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: Update EMBA version details
-        committer: GitHub <noreply@github.com>
-        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-        signoff: false
-        branch: update_emba_version_details
-        delete-branch: true
-        title: 'Update EMBA version details'
-        body: |
-          Update report
-          - Nightly update of EMBA version details
-        labels: |
-          automerge
-          automated pr
-        milestone: 0
-        draft: false
+    - name: sync it
+      run: gh repo sync $REPOSITORY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
