@@ -28,7 +28,8 @@ jobs:
         sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq . | grep "digest" | head -n1 | awk '{print $2}' | sed -E 's/"sha256:(.+)",/\1/' > EMBA_CONTAINER_HASH.txt
         curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > NVD_HASH.txt
     - name: sync it
-      run: gh repo sync $REPOSITORY
+      run: |
+        git commit -am "version update"
+        git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPOSITORY: ${{ github.repository }}
