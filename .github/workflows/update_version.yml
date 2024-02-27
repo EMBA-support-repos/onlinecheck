@@ -2,7 +2,7 @@ name: Update EMBA version details
 
 on:
   schedule:
-    - cron: '0 0 * * *' # do it every day
+    - cron: '*/5 * * * *' # do it every 5mins
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
