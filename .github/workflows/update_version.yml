@@ -21,11 +21,11 @@ jobs:
         sudo apt-get install curl -y
     - name: update EMBA version details
       run: |
-        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba/blob/master/config/VERSION.txt | grep -w "rawLines" | sed -E 's/.*"rawLines":\[\"([0-9]\.[0-9]\.[0-9])(.*)\"\]\,.*/\1\2/' > EMBA_VERSION.txt
-        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EMBA_GITHUB_HASH.txt
-        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/embark | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EMBArk_GITHUB_HASH.txt
-        curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > NVD_HASH.txt
-        curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/EPSS-data | grep "spoofed_commit_check" | sed -E 's/.*commit_check\/([a-zA-Z0-9]{8}).*/\1/' > EPSS_HASH.txt
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba/blob/master/config/VERSION.txt | grep -w "rawLines" | sed -E 's/.*"rawLines":\[\"([0-9]\.[0-9]\.[0-9])(.*)\"\]\,.*/\1\2/' > EMBA_VERSION.txt || ( echo "[-] Error in VERSION.txt processing" && exit 1)
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/emba | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > EMBA_GITHUB_HASH.txt || ( echo "[-] Error in EMBA PR id processing" && exit 1)
+        curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/embark | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > EMBArk_GITHUB_HASH.txt || ( echo "[-] Error in EMBArk PR id processing" && exit 1)
+        curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > NVD_HASH.txt || ( echo "[-] Error in NVD PR id processing" && exit 1)
+        curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/EPSS-data | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > EPSS_HASH.txt || ( echo "[-] Error in EPSS PR id processing" && exit 1)
         sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq -rc '.Descriptor.digest' | cut -d ':' -f2 > EMBA_CONTAINER_HASH.txt
     - name: Commit changes
       id: commit
