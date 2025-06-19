@@ -19,6 +19,8 @@ Check out the greatest Firmware Analyzer [*EMBA*](https://github.com/e-m-b-a/emb
 
 ## Latest news
 
+* [*EMBA reached the next milestone. 3000 GitHub stars accomplished.*](https://github.com/e-m-b-a/emba/)
+* [*TROOPERS 25 Talk announced*](https://troopers.de/troopers25/talks/cblhdx/)
 * [*EMBA v1.5.2 - SBOM - The next generation*](https://github.com/e-m-b-a/emba/releases/tag/v1.5.2-SBOM-next-generation-EMBA)
 * [*EMBArk v0.2 - SBOM is a team sport*](https://github.com/e-m-b-a/embark/releases/tag/v0.2)
 * [**FLOSS Weekly** Episode 802: EMBA – Layers Upon Layers Of Bash](https://hackaday.com/2024/09/25/floss-weekly-episode-802-emba-layers-upon-layers-of-bash/)
@@ -30,8 +32,6 @@ Check out the greatest Firmware Analyzer [*EMBA*](https://github.com/e-m-b-a/emb
 * [*Recording of Black Hat EU 2022 Arsenal session available*](https://github.com/e-m-b-a/emba/wiki#publications-talks-and-live-demos)
 * [*Recording of TROOPERS talk available*](https://github.com/e-m-b-a/emba/wiki#publications-talks-and-live-demos)
 * [*EMBA is now part of the OWASP Firmware Security Testing Methodology*](https://github.com/scriptingxss/owasp-fstm#emba---embedded-analyzer)
-
-
 
 ***
 <p align="center"><b>EMBA - firmware security scanning at its best</b></p>
