@@ -26,7 +26,8 @@ jobs:
         curl --connect-timeout 5 -s -o - https://github.com/e-m-b-a/embark | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > EMBArk_GITHUB_HASH.txt || ( echo "[-] Error in EMBArk PR id processing" && exit 1)
         curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/nvd-json-data-feeds | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > NVD_HASH.txt || ( echo "[-] Error in NVD PR id processing" && exit 1)
         curl --connect-timeout 5 -s -o - https://github.com/EMBA-support-repos/EPSS-data | tr ',' '\n' | grep -o -E "currentOid\":\"[a-zA-Z0-9]{40}" | cut -d ':' -f2 | tr -d '"' > EPSS_HASH.txt || ( echo "[-] Error in EPSS PR id processing" && exit 1)
-        sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq -rc '.Descriptor.digest' | cut -d ':' -f2 > EMBA_CONTAINER_HASH.txt
+        # sudo docker manifest inspect embeddedanalyzer/emba:latest -v | jq -rc '.Descriptor.digest' | cut -d ':' -f2 > EMBA_CONTAINER_HASH.txt
+        curl --connect-timeout 5 -s -o - https://hub.docker.com/v2/repositories/embeddedanalyzer/emba/tags/latest -H Content-Type: application/json | jq -r .digest | cut -d ':' -f2 | cut -d ':' -f2 > EMBA_CONTAINER_HASH.txt || ( echo "[-] Error in EMBA docker image processing" && exit 1)
     - name: Commit changes
       id: commit
       env:
