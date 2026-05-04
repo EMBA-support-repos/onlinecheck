@@ -19,6 +19,7 @@ Check out the greatest Firmware Analyzer [*EMBA*](https://github.com/e-m-b-a/emb
 
 ## Latest news
 
+* [*EMBA v2.0.1 - The interactor*](https://github.com/e-m-b-a/emba/releases/tag/v2.0.1-interactor)
 * [*EMBA v2.0.0 - A brave new world of firmware analysis*](https://github.com/e-m-b-a/emba/releases/tag/v2.0.0-A-brave-new-world)
 * [*The EMBA book is available*](https://github.com/e-m-b-a/emba/wiki/The-EMBA-book-%E2%80%90-Overview)
 * [*The new EMBA merch store is online - check your merch now*](https://emba-firmware-analyzer.myspreadshop.de/)
